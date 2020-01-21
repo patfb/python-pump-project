@@ -6,13 +6,11 @@ class Pump:
         self.id = id
         self.isPumpOn = False
         self.history = []
-        self.currentLog = None
 
     def startTimer(self):
         if(self.isPumpOn == False):
             currentTime = datetime.now()
-            self.startTime = currentTime
-            self.currentLog = HistoryItem(startTime=currentTime)
+            self.history.append(HistoryItem(startTime=currentTime))
             self.isPumpOn = True
         else:
             print(f"Pump: {self.id} is already on")
@@ -20,13 +18,14 @@ class Pump:
     def stopTimer(self):
         if(self.isPumpOn == True):
             currentTime = datetime.now()
-            self.endTime = currentTime
-            self.currentLog.endTime = currentTime
-            self.history.append(self.currentLog)
-            self.currentLog = None
+            self.history[-1].endTime = currentTime
             self.isPumpOn = False
         else:
             print(f"Pump: {self.id} is already off")
+
+    def printAllLogs(self):
+        for item in self.history:
+            print(f"startTime: {item.startTime} endTime: {item.endTime}")
 
 
 class HistoryItem:
