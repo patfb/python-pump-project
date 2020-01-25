@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Google API Config
+config
+
+# Local VS Code Settings
+.vscode/settings.json
